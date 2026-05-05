@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<!-- saved from url=(0060)file:///C:/Users/Admin/Downloads/scammer_database%20(1).html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ScamShield India — Public Scammer Database</title>
+<link href="./ScamShield India — Public Scammer Database_files/css2" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --red: #E8392A;
+    --red-dark: #B02518;
+    --red-light: #FDF0EE;
+    --red-mid: #F4907E;
+    --ink: #12100E;
+    --ink2: #3A3530;
+    --ink3: #7A736C;
+    --surface: #FDFAF8;
+    --surface2: #F5F0EB;
+    --border: #E8E0D6;
+    --green: #1A7A4A;
+    --green-light: #EBF7F1;
+    --amber: #B55E00;
+    --amber-light: #FFF4E6;
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--surface);
+    color: var(--ink);
+    min-height: 100vh;
+  }
+
+  header {
+    background: var(--ink);
+    color: white;
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.2rem;
+    letter-spacing: -0.5px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .logo-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--red); }
+
+  .header-stat {
+    font-size: 12px;
+    color: rgba(255,255,255,0.5);
+  }
+
+  .header-stat span { color: var(--red-mid); font-weight: 500; }
+
+  .hero {
+    background: var(--ink);
+    color: white;
+    padding: 3rem 2rem 2.5rem;
+    text-align: center;
+    border-bottom: 3px solid var(--red);
+  }
+
+  .hero h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(1.8rem, 5vw, 3rem);
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 0.75rem;
+    letter-spacing: -1px;
+  }
+
+  .hero h1 em { color: var(--red-mid); font-style: normal; }
+
+  .hero p {
+    color: rgba(255,255,255,0.55);
+    font-size: 0.95rem;
+    max-width: 480px;
+    margin: 0 auto 1.5rem;
+    line-height: 1.6;
+  }
+
+  .search-bar {
+    display: flex;
+    max-width: 520px;
+    margin: 0 auto;
+    border: 2px solid var(--red);
+    border-radius: 8px;
+    overflow: hidden;
+    background: white;
+  }
+
+  .search-bar input {
+    flex: 1;
+    padding: 12px 16px;
+    font-size: 1rem;
+    font-family: 'DM Sans', sans-serif;
+    border: none;
+    outline: none;
+    color: var(--ink);
+  }
+
+  .search-bar button {
+    background: var(--red);
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    cursor: pointer;
+    letter-spacing: 0.5px;
+    transition: background 0.15s;
+  }
+
+  .search-bar button:hover { background: var(--red-dark); }
+
+  .main { max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem; }
+
+  .tabs {
+    display: flex;
+    gap: 4px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 1.5rem;
+  }
+
+  .tab {
+    padding: 10px 20px;
+    font-family: 'Syne', sans-serif;
+    font-weight: 600;
+    font-size: 0.85rem;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    color: var(--ink3);
+    transition: all 0.15s;
+    margin-bottom: -1px;
+    letter-spacing: 0.3px;
+  }
+
+  .tab.active { color: var(--red); border-bottom-color: var(--red); }
+
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  /* Database list */
+  .filters {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+  }
+
+  .filter-btn {
+    padding: 6px 14px;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    font-size: 12px;
+    cursor: pointer;
+    background: white;
+    color: var(--ink2);
+    font-family: 'DM Sans', sans-serif;
+    transition: all 0.15s;
+  }
+
+  .filter-btn.active, .filter-btn:hover {
+    background: var(--red);
+    color: white;
+    border-color: var(--red);
+  }
+
+  .scammer-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1rem 1.25rem;
+    margin-bottom: 10px;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 12px;
+    align-items: start;
+    transition: border-color 0.15s;
+    animation: fadeIn 0.3s ease;
+  }
+
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+  .scammer-card:hover { border-color: var(--red-mid); }
+
+  .danger-badge {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 0.85rem;
+    flex-shrink: 0;
+  }
+
+  .danger-high { background: var(--red-light); color: var(--red); }
+  .danger-med { background: var(--amber-light); color: var(--amber); }
+  .danger-low { background: var(--green-light); color: var(--green); }
+
+  .card-main { min-width: 0; }
+
+  .card-number {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--ink);
+    margin-bottom: 2px;
+  }
+
+  .card-type {
+    font-size: 12px;
+    color: var(--ink3);
+    margin-bottom: 6px;
+  }
+
+  .card-desc {
+    font-size: 13px;
+    color: var(--ink2);
+    line-height: 1.5;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .card-meta {
+    text-align: right;
+    flex-shrink: 0;
+  }
+
+  .report-count {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--red);
+  }
+
+  .report-label { font-size: 11px; color: var(--ink3); }
+
+  .card-date { font-size: 11px; color: var(--ink3); margin-top: 4px; }
+
+  /* Report form */
+  .form-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+  }
+
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  @media (max-width: 540px) { .form-grid { grid-template-columns: 1fr; } }
+
+  .field { display: flex; flex-direction: column; gap: 5px; }
+  .field.full { grid-column: 1 / -1; }
+
+  .field label {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--ink3);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .field input, .field select, .field textarea {
+    padding: 10px 12px;
+    border: 1px solid var(--border);
+    border-radius: 7px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    color: var(--ink);
+    background: var(--surface);
+    outline: none;
+    transition: border-color 0.15s;
+    width: 100%;
+  }
+
+  .field input:focus, .field select:focus, .field textarea:focus {
+    border-color: var(--red);
+    background: white;
+  }
+
+  .field textarea { resize: vertical; min-height: 80px; }
+
+  .submit-btn {
+    width: 100%;
+    margin-top: 1rem;
+    padding: 13px;
+    background: var(--red);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    letter-spacing: 0.5px;
+    transition: background 0.15s, transform 0.1s;
+  }
+
+  .submit-btn:hover { background: var(--red-dark); }
+  .submit-btn:active { transform: scale(0.99); }
+
+  .toast {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    background: var(--ink);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    transition: transform 0.3s;
+    z-index: 999;
+    white-space: nowrap;
+  }
+
+  .toast.show { transform: translateX(-50%) translateY(0); }
+
+  .empty-state {
+    text-align: center;
+    padding: 3rem;
+    color: var(--ink3);
+  }
+
+  .empty-state p { font-size: 14px; margin-top: 8px; }
+
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 1.5rem;
+  }
+
+  .stat-box {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem;
+    text-align: center;
+  }
+
+  .stat-num {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.6rem;
+    color: var(--red);
+  }
+
+  .stat-lbl { font-size: 12px; color: var(--ink3); margin-top: 2px; }
+
+  .search-result-banner {
+    background: var(--red-light);
+    border: 1px solid var(--red-mid);
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin-bottom: 1rem;
+    font-size: 14px;
+    color: var(--red-dark);
+    display: none;
+  }
+
+  .safe-banner {
+    background: var(--green-light);
+    border: 1px solid #A8D8BE;
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin-bottom: 1rem;
+    font-size: 14px;
+    color: var(--green);
+    display: none;
+  }
+
+  .authorities {
+    background: var(--surface2);
+    border-radius: 10px;
+    padding: 1.25rem;
+    margin-top: 1.5rem;
+  }
+
+  .authorities h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--ink3);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 10px;
+  }
+
+  .authority-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 12px;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 7px;
+    text-decoration: none;
+    margin-bottom: 6px;
+    transition: border-color 0.15s;
+  }
+
+  .authority-link:hover { border-color: var(--red-mid); }
+  .authority-link p { font-size: 13px; font-weight: 500; color: var(--ink); }
+  .authority-link span { font-size: 12px; color: var(--ink3); }
+  .authority-link .badge { font-size: 11px; color: var(--red); font-weight: 600; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <div class="logo-dot"></div>
+    ScamShield India
+  </div>
+  <div class="header-stat">Total reports: <span id="total-count">6</span></div>
+</header>
+
+<div class="hero">
+  <h1>India's <em>Public</em><br>Scammer Database</h1>
+  <p>Search any phone number, UPI ID, or email to check if it's been reported as a scammer. Protect yourself and others.</p>
+  <div class="search-bar">
+    <input type="text" id="global-search" placeholder="Search number, UPI, email...">
+    <button onclick="doSearch()">SEARCH</button>
+  </div>
+</div>
+
+<div class="main">
+
+  <div id="search-result-banner" class="search-result-banner"></div>
+  <div id="safe-banner" class="safe-banner"></div>
+
+  <div class="stats-row">
+    <div class="stat-box">
+      <div class="stat-num" id="stat-total">6</div>
+      <div class="stat-lbl">Scammers reported</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-num" id="stat-this-week">5</div>
+      <div class="stat-lbl">This week</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-num" id="stat-types">6</div>
+      <div class="stat-lbl">Scam types tracked</div>
+    </div>
+  </div>
+
+  <div class="tabs">
+    <div class="tab active" onclick="switchTab(&#39;database&#39;)">Database</div>
+    <div class="tab" onclick="switchTab(&#39;report&#39;)">Report a Scammer</div>
+    <div class="tab" onclick="switchTab(&#39;authorities&#39;)">Report to Authorities</div>
+  </div>
+
+  <div id="panel-database" class="panel active">
+    <div class="filters" id="filter-row">
+      <button class="filter-btn active" onclick="setFilter(&#39;All&#39;)">All</button>
+      <button class="filter-btn" onclick="setFilter(&#39;Prize / lottery scam&#39;)">Prize scam</button>
+      <button class="filter-btn" onclick="setFilter(&#39;UPI / payment fraud&#39;)">UPI fraud</button>
+      <button class="filter-btn" onclick="setFilter(&#39;Bank impersonation&#39;)">Bank scam</button>
+      <button class="filter-btn" onclick="setFilter(&#39;Tech support scam&#39;)">Tech support</button>
+      <button class="filter-btn" onclick="setFilter(&#39;KYC / account block scam&#39;)">KYC scam</button>
+      <button class="filter-btn" onclick="setFilter(&#39;Job offer scam&#39;)">Job scam</button>
+    </div>
+    <div id="scammer-list">
+    <div class="scammer-card">
+      <div class="danger-badge danger-high">HIGH</div>
+      <div class="card-main">
+        <div class="card-number">+91 99001 23456 · refund.hdfc@paytm</div>
+        <div class="card-type">UPI / payment fraud via WhatsApp · ₹8,000 lost</div>
+        <div class="card-desc">Sent UPI collect request saying it is a refund from Amazon. When approved, money was debited not credited.</div>
+      </div>
+      <div class="card-meta">
+        <div class="report-count">4</div>
+        <div class="report-label">reports</div>
+        <div class="card-date">Yesterday</div>
+      </div>
+    </div>
+  
+    <div class="scammer-card">
+      <div class="danger-badge danger-high">HIGH</div>
+      <div class="card-main">
+        <div class="card-number">+91 98712 34567 · prize.winner@ybl</div>
+        <div class="card-type">Prize / lottery scam via WhatsApp · ₹15,000 lost</div>
+        <div class="card-desc">Sent message saying "Congratulations! ₹20,000 credited. Click to claim." Asked for OTP to release funds.</div>
+      </div>
+      <div class="card-meta">
+        <div class="report-count">7</div>
+        <div class="report-label">reports</div>
+        <div class="card-date">2 days ago</div>
+      </div>
+    </div>
+  
+    <div class="scammer-card">
+      <div class="danger-badge danger-high">HIGH</div>
+      <div class="card-main">
+        <div class="card-number">+91 91234 56789 · easyjobs.hr@oksbi</div>
+        <div class="card-type">Job offer scam via SMS · ₹2,000 lost</div>
+        <div class="card-desc">Offered work from home job. Asked to pay ₹2000 registration fee to start. Disappeared after payment.</div>
+      </div>
+      <div class="card-meta">
+        <div class="report-count">9</div>
+        <div class="report-label">reports</div>
+        <div class="card-date">3 days ago</div>
+      </div>
+    </div>
+  
+    <div class="scammer-card">
+      <div class="danger-badge danger-high">HIGH</div>
+      <div class="card-main">
+        <div class="card-number">+91 87654 32100</div>
+        <div class="card-type">Bank impersonation via Phone call · ₹45,000 lost</div>
+        <div class="card-desc">Posed as SBI customer care. Said account will be blocked. Asked for Debit card number and OTP to "re-verify KYC".</div>
+      </div>
+      <div class="card-meta">
+        <div class="report-count">12</div>
+        <div class="report-label">reports</div>
+        <div class="card-date">5 days ago</div>
+      </div>
+    </div>
+  
+    <div class="scammer-card">
+      <div class="danger-badge danger-med">MED</div>
+      <div class="card-main">
+        <div class="card-number">+91 88990 01122</div>
+        <div class="card-type">KYC / account block scam via SMS</div>
+        <div class="card-desc">SMS saying PhonePe account suspended due to KYC expiry. Link led to fake PhonePe page stealing login.</div>
+      </div>
+      <div class="card-meta">
+        <div class="report-count">5</div>
+        <div class="report-label">reports</div>
+        <div class="card-date">6 days ago</div>
+      </div>
+    </div>
+  
+    <div class="scammer-card">
+      <div class="danger-badge danger-med">MED</div>
+      <div class="card-main">
+        <div class="card-number">+91 76543 21098</div>
+        <div class="card-type">Tech support scam via Phone call</div>
+        <div class="card-desc">Called claiming to be Microsoft support. Said virus detected on PC. Asked to install AnyDesk for "repair".</div>
+      </div>
+      <div class="card-meta">
+        <div class="report-count">3</div>
+        <div class="report-label">reports</div>
+        <div class="card-date">8 days ago</div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <div id="panel-report" class="panel">
+    <div class="form-card">
+      <div class="form-grid">
+        <div class="field">
+          <label>Phone number *</label>
+          <input type="tel" id="f-phone" placeholder="+91 98765 43210">
+        </div>
+        <div class="field">
+          <label>Scam type *</label>
+          <select id="f-type">
+            <option value="">-- Select --</option>
+            <option>Prize / lottery scam</option>
+            <option>UPI / payment fraud</option>
+            <option>Bank impersonation</option>
+            <option>Tech support scam</option>
+            <option>Job offer scam</option>
+            <option>KYC / account block scam</option>
+            <option>Investment / trading scam</option>
+            <option>Digital arrest scam</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>UPI ID (if known)</label>
+          <input type="text" id="f-upi" placeholder="scammer@upi">
+        </div>
+        <div class="field">
+          <label>Amount lost (₹)</label>
+          <input type="number" id="f-amount" placeholder="0 if none">
+        </div>
+        <div class="field">
+          <label>Contact method</label>
+          <select id="f-method">
+            <option value="">-- Select --</option>
+            <option>SMS</option>
+            <option>WhatsApp</option>
+            <option>Phone call</option>
+            <option>Email</option>
+            <option>Social media</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Danger level</label>
+          <select id="f-danger">
+            <option value="HIGH">High — lost money</option>
+            <option value="MED">Medium — attempted fraud</option>
+            <option value="LOW">Low — suspicious only</option>
+          </select>
+        </div>
+        <div class="field full">
+          <label>Scammer message / description *</label>
+          <textarea id="f-desc" placeholder="Paste the scam message or describe what happened..."></textarea>
+        </div>
+      </div>
+      <button class="submit-btn" onclick="submitReport()">Submit report to database</button>
+    </div>
+  </div>
+
+  <div id="panel-authorities" class="panel">
+    <div class="authorities" style="margin-top:0;">
+      <h3>Official reporting channels</h3>
+      <a href="https://cybercrime.gov.in/" class="authority-link" target="_blank">
+        <div><p>National Cyber Crime Portal</p><span>cybercrime.gov.in — file FIR online</span></div>
+        <div class="badge">MOST IMPORTANT</div>
+      </a>
+      <div class="authority-link" style="cursor:default;">
+        <div><p>Cyber Crime Helpline</p><span>Call 1930 — 24x7, free, all India</span></div>
+        <div class="badge">CALL 1930</div>
+      </div>
+      <a href="https://sancharsaathi.gov.in/sfc/Home/sfc-complaint.jsp" class="authority-link" target="_blank">
+        <div><p>Sanchar Saathi — Block scammer SIM</p><span>sancharsaathi.gov.in</span></div>
+        <div class="badge">BLOCK SIM</div>
+      </a>
+      <a href="https://www.npci.org.in/what-we-do/upi/dispute-redressal-mechanism" class="authority-link" target="_blank">
+        <div><p>NPCI — UPI fraud complaint</p><span>For UPI payment fraud specifically</span></div>
+        <div class="badge">UPI FRAUD</div>
+      </a>
+      <div class="authority-link" style="cursor:default;">
+        <div><p>RBI Ombudsman — Bank fraud</p><span>Call 14448 or visit bankingombudsman.rbi.org.in</span></div>
+        <div class="badge">BANKING</div>
+      </div>
+    </div>
+    <div style="background:var(--red-light); border:1px solid var(--red-mid); border-radius:10px; padding:1.25rem; margin-top:1rem;">
+      <h3 style="font-family:&#39;Syne&#39;,sans-serif; font-size:0.85rem; font-weight:700; color:var(--red-dark); margin-bottom:8px;">If you lost money — act within 24 hours</h3>
+      <p style="font-size:13px; color:var(--red-dark); line-height:1.6;">1. Call <strong>1930</strong> immediately to freeze the fraudulent transaction.<br>2. Call your bank to freeze your account.<br>3. File complaint at <strong>cybercrime.gov.in</strong> with screenshots as evidence.<br>4. Visit your nearest police station with a printed complaint.</p>
+    </div>
+  </div>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const STORAGE_KEY = 'scamshield_india_db_v2';
+
+const SEED_DATA = [
+  { id: 's1', phone: '+91 98712 34567', upi: 'prize.winner@ybl', type: 'Prize / lottery scam', desc: 'Sent message saying "Congratulations! ₹20,000 credited. Click to claim." Asked for OTP to release funds.', danger: 'HIGH', method: 'WhatsApp', amount: 15000, date: Date.now() - 86400000 * 2, reports: 7 },
+  { id: 's2', phone: '+91 87654 32100', upi: '', type: 'Bank impersonation', desc: 'Posed as SBI customer care. Said account will be blocked. Asked for Debit card number and OTP to "re-verify KYC".', danger: 'HIGH', method: 'Phone call', amount: 45000, date: Date.now() - 86400000 * 5, reports: 12 },
+  { id: 's3', phone: '+91 99001 23456', upi: 'refund.hdfc@paytm', type: 'UPI / payment fraud', desc: 'Sent UPI collect request saying it is a refund from Amazon. When approved, money was debited not credited.', danger: 'HIGH', method: 'WhatsApp', amount: 8000, date: Date.now() - 86400000 * 1, reports: 4 },
+  { id: 's4', phone: '+91 76543 21098', upi: '', type: 'Tech support scam', desc: 'Called claiming to be Microsoft support. Said virus detected on PC. Asked to install AnyDesk for "repair".', danger: 'MED', method: 'Phone call', amount: 0, date: Date.now() - 86400000 * 8, reports: 3 },
+  { id: 's5', phone: '+91 91234 56789', upi: 'easyjobs.hr@oksbi', type: 'Job offer scam', desc: 'Offered work from home job. Asked to pay ₹2000 registration fee to start. Disappeared after payment.', danger: 'HIGH', method: 'SMS', amount: 2000, date: Date.now() - 86400000 * 3, reports: 9 },
+  { id: 's6', phone: '+91 88990 01122', upi: '', type: 'KYC / account block scam', desc: 'SMS saying PhonePe account suspended due to KYC expiry. Link led to fake PhonePe page stealing login.', danger: 'MED', method: 'SMS', amount: 0, date: Date.now() - 86400000 * 6, reports: 5 },
+];
+
+function loadDB() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (raw) return JSON.parse(raw);
+  } catch(e) {}
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(SEED_DATA));
+  return [...SEED_DATA];
+}
+
+function saveDB(db) {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(db));
+}
+
+let db = loadDB();
+let activeFilter = 'All';
+let searchQuery = '';
+
+function updateStats() {
+  const total = db.length;
+  const weekAgo = Date.now() - 86400000 * 7;
+  const thisWeek = db.filter(r => r.date > weekAgo).length;
+  const types = new Set(db.map(r => r.type)).size;
+  document.getElementById('stat-total').textContent = total;
+  document.getElementById('stat-this-week').textContent = thisWeek;
+  document.getElementById('stat-types').textContent = types;
+  document.getElementById('total-count').textContent = total;
+}
+
+function dangerClass(d) {
+  if (d === 'HIGH') return 'danger-high';
+  if (d === 'MED') return 'danger-med';
+  return 'danger-low';
+}
+
+function timeAgo(ts) {
+  const diff = Date.now() - ts;
+  const days = Math.floor(diff / 86400000);
+  if (days === 0) return 'Today';
+  if (days === 1) return 'Yesterday';
+  return days + ' days ago';
+}
+
+function renderList() {
+  const list = document.getElementById('scammer-list');
+  let filtered = db;
+
+  if (activeFilter !== 'All') filtered = filtered.filter(r => r.type === activeFilter);
+  if (searchQuery) {
+    const q = searchQuery.toLowerCase();
+    filtered = filtered.filter(r =>
+      r.phone.toLowerCase().includes(q) ||
+      (r.upi && r.upi.toLowerCase().includes(q)) ||
+      r.type.toLowerCase().includes(q) ||
+      r.desc.toLowerCase().includes(q)
+    );
+  }
+
+  filtered.sort((a, b) => b.date - a.date);
+
+  if (filtered.length === 0) {
+    list.innerHTML = `<div class="empty-state"><div style="font-size:2rem;">🔍</div><p>${searchQuery ? 'No results found for "' + searchQuery + '"' : 'No reports yet. Be the first to report!'}</p></div>`;
+    return;
+  }
+
+  list.innerHTML = filtered.map(r => `
+    <div class="scammer-card">
+      <div class="danger-badge ${dangerClass(r.danger)}">${r.danger}</div>
+      <div class="card-main">
+        <div class="card-number">${r.phone}${r.upi ? ' · ' + r.upi : ''}</div>
+        <div class="card-type">${r.type}${r.method ? ' via ' + r.method : ''}${r.amount > 0 ? ' · ₹' + r.amount.toLocaleString('en-IN') + ' lost' : ''}</div>
+        <div class="card-desc">${r.desc}</div>
+      </div>
+      <div class="card-meta">
+        <div class="report-count">${r.reports}</div>
+        <div class="report-label">reports</div>
+        <div class="card-date">${timeAgo(r.date)}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function setFilter(f) {
+  activeFilter = f;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.toggle('active', b.textContent.trim() === f || (f === 'All' && b.textContent.trim() === 'All')));
+  searchQuery = '';
+  document.getElementById('search-result-banner').style.display = 'none';
+  document.getElementById('safe-banner').style.display = 'none';
+  renderList();
+}
+
+function doSearch() {
+  const q = document.getElementById('global-search').value.trim();
+  if (!q) return;
+  searchQuery = q;
+  activeFilter = 'All';
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+
+  switchTab('database');
+  renderList();
+
+  const matches = db.filter(r =>
+    r.phone.toLowerCase().includes(q.toLowerCase()) ||
+    (r.upi && r.upi.toLowerCase().includes(q.toLowerCase()))
+  );
+
+  const sb = document.getElementById('search-result-banner');
+  const safe = document.getElementById('safe-banner');
+
+  if (matches.length > 0) {
+    sb.style.display = 'block';
+    safe.style.display = 'none';
+    sb.innerHTML = `<strong>Warning!</strong> "${q}" has been reported <strong>${matches.reduce((a,r) => a + r.reports, 0)} times</strong> as a scammer. Do not engage or share any personal details.`;
+  } else {
+    sb.style.display = 'none';
+    safe.style.display = 'block';
+    safe.innerHTML = `<strong>Not found in database</strong> — "${q}" has not been reported yet. Still be cautious. If you received a suspicious message from this number, you can report it below.`;
+  }
+}
+
+document.getElementById('global-search').addEventListener('keydown', e => { if (e.key === 'Enter') doSearch(); });
+
+function submitReport() {
+  const phone = document.getElementById('f-phone').value.trim();
+  const type = document.getElementById('f-type').value;
+  const desc = document.getElementById('f-desc').value.trim();
+
+  if (!phone || !type || !desc) {
+    showToast('Please fill in phone number, scam type, and description.');
+    return;
+  }
+
+  const existing = db.find(r => r.phone.replace(/\s/g,'') === phone.replace(/\s/g,''));
+  if (existing) {
+    existing.reports += 1;
+    existing.date = Date.now();
+    showToast('This number already exists — report count updated!');
+  } else {
+    db.unshift({
+      id: 'u' + Date.now(),
+      phone,
+      upi: document.getElementById('f-upi').value.trim(),
+      type,
+      desc,
+      danger: document.getElementById('f-danger').value,
+      method: document.getElementById('f-method').value,
+      amount: parseInt(document.getElementById('f-amount').value) || 0,
+      date: Date.now(),
+      reports: 1
+    });
+    showToast('Scammer reported! Database updated.');
+  }
+
+  saveDB(db);
+  updateStats();
+  document.getElementById('f-phone').value = '';
+  document.getElementById('f-upi').value = '';
+  document.getElementById('f-amount').value = '';
+  document.getElementById('f-desc').value = '';
+  document.getElementById('f-type').value = '';
+  document.getElementById('f-method').value = '';
+  document.getElementById('f-danger').value = 'HIGH';
+
+  switchTab('database');
+  renderList();
+}
+
+function switchTab(id) {
+  document.querySelectorAll('.tab').forEach((t, i) => {
+    const ids = ['database', 'report', 'authorities'];
+    t.classList.toggle('active', ids[i] === id);
+  });
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('panel-' + id).classList.add('active');
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+updateStats();
+renderList();
+</script>
+
+
+</body></html>
